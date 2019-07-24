@@ -56,7 +56,7 @@ const conf = {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin,
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
           'sass-loader',
@@ -66,14 +66,14 @@ const conf = {
   },
   resolve: {
     modules: ['src', 'node_modules'],
-    extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    extensions: ['.tsx', '.ts', '.js'],
     plugins: [
       new DirectoryNamedWebpackPlugin(true),
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: devMode ? '[name].css' : '[name].[hash].css',
+      filename: devMode ? 'main.css' : 'main.[hash].css',
     }),
     new HtmlWebpackPlugin({
       inject: false,
@@ -87,7 +87,7 @@ const conf = {
 
 module.exports = (env, options) => {
   const production = options.mode === 'production';
-  conf.devtool = production ? false : 'eval-sourcemap';
+  conf.devtool = production ? false : 'inline-source-map';
 
   return conf;
 };
