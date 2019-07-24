@@ -3,7 +3,7 @@ import * as ACT from './actions';
 import * as INT from '../models';
 
 
-const InitialState: INT.Stepper = {
+const InitialState: INT.State = {
   stepper: [
     {
       type: C.RADIO_GROUP,
@@ -171,7 +171,12 @@ const InitialState: INT.Stepper = {
   ],
 };
 
-function reducer(state = InitialState, action) {
+interface Action {
+  type: string
+  payload?: any,
+}
+
+function reducer(state = InitialState, action: Action) {
   switch (action.type) {
     case ACT.REFRESH_STEPPER:
       return {

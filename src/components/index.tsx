@@ -53,7 +53,7 @@ const Stepper = ({ tagline, steps }: StepperProps) => {
 
   const items = renderSteps(steps);
   const isLastStep = currentStep === steps.length;
-
+  // TODO: secondary btn
   return (
     <div className="main-wrapper">
       <h2>{ tagline }</h2>
@@ -64,7 +64,7 @@ const Stepper = ({ tagline, steps }: StepperProps) => {
           &nbsp;из&nbsp;
           { steps.length }
         </p>
-        <ProgressBar now={100 / steps.length * currentStep} variant="secondary" />
+        <ProgressBar now={100 / steps.length * currentStep} variant="info" /> 
         <hr />
         <Form>
           {

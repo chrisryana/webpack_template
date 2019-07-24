@@ -11,7 +11,7 @@ export interface InputItem {
 };
 
 export interface RadioItem {
-  name: string,
+  name?: string,
   alias: string,
   label: string,
 }
@@ -20,11 +20,12 @@ export interface Step {
   type: string,
   legend?: string,
   choosen?: string,
-  content?: Array<InputItem | RadioItem>,
+  content?: (InputItem | RadioItem)[],
   [C.TYPE_ENTITY]?: InputItem[],
   [C.TYPE_INDENT]?: InputItem[],
+  [mode: string]: any,
 }
 
-export interface Stepper {
+export interface State {
   stepper: Step[],
 }

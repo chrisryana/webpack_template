@@ -6,9 +6,10 @@ import {
   Col,
 } from 'react-bootstrap';
 import Stepper from './components';
+import * as INT from './models';
 
 const App = () => {
-  const steps = useSelector(state => state.stepper, shallowEqual); // замена mapstatetoprops
+  const steps = useSelector((state: INT.State) => state.stepper, shallowEqual); // замена mapstatetoprops
 
   return (
     <Container fluid>

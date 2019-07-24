@@ -14,7 +14,7 @@ const InputsList = ({ elems, mode = null }: InputGroupProps) => {
   const dispatch = useDispatch();
   const content = mode ? elems[mode] : elems.content;
 
-  const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeValue = (e: React.FormEvent & React.ChangeEvent<HTMLInputElement>): void => {
     const { target } = e;
     const inpIndex = target.getAttribute('data-id');
     content[inpIndex].value = target.value;

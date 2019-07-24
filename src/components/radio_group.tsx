@@ -2,13 +2,20 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { Form } from 'react-bootstrap';
 import * as ACT from '../store/actions';
+import * as INT from '../models';
 
 
-const RadioGroup = ({ handleSetMode, elems, legend }) => {
+interface RadioGroupProps {
+  handleSetMode: Function,
+  elems: INT.Step,
+  legend: string,
+}
+
+const RadioGroup = ({ handleSetMode, elems, legend }: RadioGroupProps) => {
   const dispatch = useDispatch();
   const { content: radios } = elems;
 
-  const onCheckRadio = (e) => {
+  const onCheckRadio = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = e;
     elems.choosen = target.getAttribute('value');
 
@@ -18,7 +25,7 @@ const RadioGroup = ({ handleSetMode, elems, legend }) => {
     });
   };
 
-  const renderRadios = arr => arr.map((item, index) => (
+  const renderRadios = (arr: INT.RadioItem[]) => arr.map((item, index) => (
     <Form.Check
       key={item.alias}
       type="radio"
@@ -36,7 +43,7 @@ const RadioGroup = ({ handleSetMode, elems, legend }) => {
 
   return (
     <fieldset>
-      <Form.Group onChange={e => handleSetMode(e.target.value)}>
+      <Form.Group onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleSetMode(e.target.value)}>
         <Form.Label as="legend">
           {
             legend

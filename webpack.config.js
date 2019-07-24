@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -60,27 +61,7 @@ const conf = {
           'postcss-loader',
           'sass-loader',
         ],
-
       },
-      // {
-      //   test: /\.(jpe?g|png|gif|svg)$/,
-      //   use: [
-      //     {
-      //       loader: 'url-loader',
-      //       options: { limit: 45000 },
-      //     },
-      //     {
-      //       loader: 'image-webpack-loader',
-      //       options: {
-      //         mozjpeg: {
-      //           progressive: true,
-      //           quality: 65,
-      //         },
-      //       },
-      //     },
-      //   ],
-
-      // },
     ],
   },
   resolve: {
