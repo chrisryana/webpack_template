@@ -17,15 +17,10 @@ export interface RadioItem {
 }
 
 export interface Step {
-  type: string,
   legend?: string,
   choosen?: string,
   content?: (InputItem | RadioItem)[],
   [C.TYPE_ENTITY]?: InputItem[],
   [C.TYPE_INDENT]?: InputItem[],
   [mode: string]: any,
-}
-
-export interface State {
-  stepper: Step[],
 }

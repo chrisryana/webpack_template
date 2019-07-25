@@ -6,18 +6,18 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
-const optimization = {
-  splitChunks: {
-    cacheGroups: {
-      node_vendors: {
-        test: /[\\/]node_modules[\\/]/,
-        name: 'vendors',
-        chunks: 'all',
-        priority: 1,
-      },
-    },
-  },
-};
+// const optimization = {
+//   splitChunks: {
+//     cacheGroups: {
+//       node_vendors: {
+//         test: /[\\/]node_modules[\\/]/,
+//         name: 'vendors',
+//         chunks: 'all',
+//         priority: 1,
+//       },
+//     },
+//   },
+// };
 
 const conf = {
   entry: './src/index.tsx',
@@ -25,8 +25,8 @@ const conf = {
     path: path.resolve(__dirname, 'dist'),
     filename: devMode ? '[name].js' : '[name].[hash].js',
   },
-  devtool: 'inline-source-map',
-  optimization,
+  // devtool: 'inline-source-map',
+  // optimization,
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
@@ -35,6 +35,12 @@ const conf = {
     progress: true,
   },
   module: {
+    loaders: [
+      { 
+        test: /\.json$/,
+        loader: 'json-loader',
+      },
+    ],
     rules: [
       {
         test: /\.tsx?$/,

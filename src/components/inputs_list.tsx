@@ -7,12 +7,10 @@ import * as INT from '../models';
 
 interface InputGroupProps {
   elems: INT.Step,
-  mode: null | string,
 }
 
-const InputsList = ({ elems, mode = null }: InputGroupProps) => {
+const InputsList = ({ elems }: InputGroupProps) => {
   const dispatch = useDispatch();
-  const content = mode ? elems[mode] : elems.content;
 
   const handleChangeValue = (e: React.FormEvent & React.ChangeEvent<HTMLInputElement>): void => {
     const { target } = e;
@@ -79,7 +77,7 @@ const InputsList = ({ elems, mode = null }: InputGroupProps) => {
     </React.Fragment>
   ));
 
-  const items = renderInputs(content);
+  const items = renderInputs(elems);
 
   return (
     <React.Fragment>

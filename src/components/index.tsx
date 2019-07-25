@@ -5,34 +5,26 @@ import {
   Button,
   ProgressBar,
 } from 'react-bootstrap';
-import RadioGroup from './radio_group';
-import InputsList from './inputs_list';
-import * as C from '../lib/const';
 import * as INT from '../models';
 
 
 interface StepperProps {
   tagline: string,
-  steps: INT.Step[],
+  children: Array<any>,
 }
 
-const Stepper = ({ tagline, steps }: StepperProps) => {
+const Stepper = ({ tagline, children }: StepperProps) => {
+  console.log(children);
   // текущий шаг
-  const [currentStep, setStep] = React.useState<number>(1);
-  // режим заявки для юр лица (entity) или ИП (indent)
-  const [currentMode, setMode] = React.useState<string>(steps[0].choosen);
+  const [currentStep, setStep] = React.useState(1);
 
 
   const handleNextStep = () => {
-    setStep(currentStep === steps.length ? 1 : currentStep + 1);
+    setStep(currentStep === children.length ? 1 : currentStep + 1);
   };
 
   const handlePrevStep = () => {
     setStep(currentStep - 1);
-  };
-
-  const handleSetMode = (modeName: string) => {
-    setMode(modeName);
   };
 
   // внутри ф-ии подразумевается обработка и отправка данных, пока пусто
@@ -44,16 +36,8 @@ const Stepper = ({ tagline, steps }: StepperProps) => {
   //   data.type === C.INPUT_GROUP ? data.content.every(item => item.isVerify) : true
   // );
 
+  const isLastStep = currentStep === children.length;
 
-  const renderSteps = (arr: INT.Step[]) => arr.map(item => (
-    item.type === C.RADIO_GROUP
-      ? <RadioGroup handleSetMode={handleSetMode} elems={item} legend={item.legend} />
-      : <InputsList elems={item} mode={item.content ? null : currentMode} />
-  ));
-
-  const items = renderSteps(steps);
-  const isLastStep = currentStep === steps.length;
-  // TODO: secondary btn
   return (
     <div className="main-wrapper">
       <h2>{ tagline }</h2>
@@ -62,13 +46,13 @@ const Stepper = ({ tagline, steps }: StepperProps) => {
           Шаг&nbsp;
           { currentStep }
           &nbsp;из&nbsp;
-          { steps.length }
+          { children.length }
         </p>
-        <ProgressBar now={100 / steps.length * currentStep} variant="info" /> 
+        <ProgressBar now={100 / children.length * currentStep} variant="secondary" /> 
         <hr />
         <Form>
           {
-            items[currentStep - 1]
+            children[currentStep - 1]
           }
         </Form>
         <ButtonToolbar className="justify-content-between">
@@ -81,7 +65,7 @@ const Stepper = ({ tagline, steps }: StepperProps) => {
           </Button>
           <Button
             variant="outline-secondary"
-            disabled={!currentMode} //  || !isAllValid(steps[currentStep - 1])
+            // disabled={!currentMode}   || !isAllValid(children[currentStep - 1])
             onClick={isLastStep ? handleSendForm : handleNextStep}
           >
             {isLastStep ? 'Отправить' : 'Продолжить'}
