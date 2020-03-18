@@ -35,13 +35,11 @@ const conf = {
     progress: true,
   },
   module: {
-    loaders: [
-      { 
+    rules: [
+      {
         test: /\.json$/,
         loader: 'json-loader',
       },
-    ],
-    rules: [
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
@@ -67,6 +65,18 @@ const conf = {
           'postcss-loader',
           'sass-loader',
         ],
+      },
+      {
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            query: {
+              name: '[name].[ext]',
+            },
+          },
+        ],
+        include: path.resolve(__dirname, '../'),
       },
     ],
   },
