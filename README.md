@@ -1,6 +1,6 @@
 # Шаблон для проекта на React
 
-![Стэк](https://github.com/christofer1501/webpack_template/blob/master/remove/stack.jpg)
+![Стэк](https://raw.githubusercontent.com/christofer1501/webpack_template/1645610be57914120464572100e8d14a2ada1cdb/stack.jpg)
 
 ## Быстрый старт
 #### **`npm i`**
